@@ -19,6 +19,34 @@ function addTask(){
 
     //after user click add we reset the input to clear
     input.value = "";
+    saveData();
 }//end of function
+
+//add evnent listener within  the unorder list of tasks 
+ul.addEventListener("click", function(e){
+    //if the click target is the li then add the check css to it and save 
+    if(e.target.tagName === "LI"){
+        e.target.classList.toggle("checked");
+        saveData()
+    }
+
+    //The other case that span or the x button is selected then remove the entire parent or element.
+    else if(e.target.tagName === "SPAN"){
+        e.target.parentElement.remove();
+        saveData()
+    }
+
+}, false);
+
+//save the data
+function saveData(){
+    localStorage.setItem("data", ul.innerHTML);
+}
+
+function showTask(){
+    ul.innerHTML = localStorage.getItem("data");
+}
+
+showTask();
 
 
